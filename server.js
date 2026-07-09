@@ -1,103 +1,3 @@
-// import express from "express";
-// import mysql from "mysql2/promise";
-// import cors from "cors";
-
-// const app = express();
-
-// app.use(cors());
-// app.use(express.json());
-
-// // =====================
-// // MYSQL CONNECTION
-// // =====================
-// const db = mysql.createPool({
-//   host: "127.0.0.1",
-//   port: 3306,
-//   user: "root",
-//   password: "Anil@2001",
-//   database: "invoice_db",
-//   waitForConnections: true,
-//   connectionLimit: 10,
-// });
-
-// // =====================
-// // API
-// // =====================
-// app.get("/api/invoice-flow", async (req, res) => {
-//   try {
-//     const { month } = req.query;
-
-//     let sql = "SELECT * FROM invoice_flow";
-//     let params = [];a
-
-//     if (month) {
-//       sql += " WHERE month = ?";
-//       params.push(month);
-//     }
-
-//     const [rows] = await db.query(sql, params);
-//     res.json(rows);
-//   } catch (err) {
-//     console.error(err);
-//     res.status(500).json({ error: "Server error" });
-//   }
-// });
-// app.get("/api/footer", (req, res) => {
-//   res.json({
-//     company: "Invoice System",
-//     year: 2026,
-//     message: "All rights reserved",
-//   });
-// });
-// app.put("/api/invoices/:id", (req, res) => {
-//   const { id } = req.params;
-//   const { invoiceNo, customer, date, amount, status, remark } = req.body;
-
-//   const sql =
-//     "UPDATE invoices SET invoiceNo=?, customer=?, date=?, amount=?, status=?, remark=? WHERE id=?";
-
-//   db.query(
-//     sql,
-//     [invoiceNo, customer, date, amount, status, remark, id],
-//     (err, result) => {
-//       if (err) return res.status(500).json(err);
-//       res.json({ message: "Invoice updated successfully" });
-//     }
-//   );
-// });
-
-// // ---------------- DELETE INVOICE ----------------
-// app.delete("/api/invoices/:id", (req, res) => {
-//   const { id } = req.params;
-
-//   db.query("DELETE FROM invoices WHERE id=?", [id], (err, result) => {
-//     if (err) return res.status(500).json(err);
-//     res.json({ message: "Invoice deleted successfully" });
-//   });
-// });
-
-// // ---------------- UPDATE REMARK ONLY ----------------
-// app.patch("/api/invoices/:id/remark", (req, res) => {
-//   const { id } = req.params;
-//   const { remark } = req.body;
-
-//   db.query(
-//     "UPDATE invoices SET remark=? WHERE id=?",
-//     [remark, id],
-//     (err, result) => {
-//       if (err) return res.status(500).json(err);
-//       res.json({ message: "Remark updated successfully" });
-//     }
-//   );
-// });
-
-// // =====================
-// // START SERVER
-// // =====================
-// const PORT = 5000;
-// app.listen(PORT, () => {
-//   console.log(`Server running on http://localhost:${PORT}`);
-// });
 
 import express from "express";
 import cors from "cors";
@@ -309,31 +209,31 @@ app.get('/api/invoice', async (req, res) => {
   }
 });
 
-// CREATE Invoice
-app.post('/api/invoice', async (req, res) => {
-  const { designation, name, process, month, year, remark } = req.body;
-  try {
-    const [result] = await db.query(
-      'INSERT INTO invoices (designation, process, month, year, remark) VALUES (?, ?, ?, ?, ?, ?)',
-      [designation, name, process || 'Pending', month, year, remark || '']
-    );
-    res.json({ id: result.insertId, success: true });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
+// // CREATE Invoice
+// app.post('/api/invoice', async (req, res) => {
+//   const { designation, name, process, month, year, remark } = req.body;
+//   try {
+//     const [result] = await db.query(
+//       'INSERT INTO invoices (designation, process, month, year, remark) VALUES (?, ?, ?, ?, ?)',
+//       [designation, name, process || 'Pending', month, year, remark || '']
+//     );
+//     res.json({ id: result.insertId, success: true });
+//   } catch (err) {
+//     res.status(500).json({ error: err.message });
+//   }
+// });
 
 
 
-// DELETE Invoice
-app.delete('/api/invoice/:id', async (req, res) => {
-  try {
-    await db.query('DELETE FROM invoices WHERE id = ?', [req.params.id]);
-    res.json({ success: true });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
+// // DELETE Invoice
+// app.delete('/api/invoice/:id', async (req, res) => {
+//   try {
+//     await db.query('DELETE FROM invoice WHERE id = ?', [req.params.id]);
+//     res.json({ success: true });
+//   } catch (err) {
+//     res.status(500).json({ error: err.message });
+//   }
+// });
 
 
 
