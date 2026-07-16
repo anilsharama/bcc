@@ -14,11 +14,10 @@ app.use(express.json());
 /* ================= MYSQL CONNECTION ================= */
 
 const db = mysql.createPool({
-  host: "127.0.0.1",
-  port: 3306,
-  user: "root",
-  password: "Anil@2001",
-  database: "invoice_db",
+  host: "192.168.70.230",
+  user: "emri",
+  password: "emri",
+  database: "INV",
   waitForConnections: true,
   connectionLimit: 10,
 });
